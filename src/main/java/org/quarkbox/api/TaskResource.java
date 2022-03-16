@@ -1,6 +1,10 @@
 package org.quarkbox.api;
 
 import io.smallrye.mutiny.Uni;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.quarkbox.model.Task;
 
 import javax.ws.rs.POST;
@@ -14,6 +18,13 @@ public class TaskResource {
     @POST
     @Path("/task")
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Create new task",
+               description = "Create new task with name and description.")
+    @APIResponse(description = "A new task with ID",
+                 content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = Task.class)))
+    @APIResponse(responseCode = "400", description = "We were unable to create a session with the provided data. Some field constraint was violated.")
+    @APIResponse(responseCode = "403", description = "You were not authorized to execute this operation.")
     public Uni<Task> create(Task task) {
         return Uni.createFrom()
                   .item(new Task(task.name, task.description));
