@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/indicators",
+    "bodyPatterns" : [ {
+      "matchesJsonPath" : {
+        "expression" : "$.namespace",
+        "contains" : "climate_change"
+      }
+    }]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "climate-change-response.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

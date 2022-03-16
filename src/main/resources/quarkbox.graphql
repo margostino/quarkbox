@@ -1,0 +1,31 @@
+directive @countries(
+    codes: [String] = []
+) on FIELD_DEFINITION
+
+"Climate Change data"
+type ClimateChange {
+    """
+    long-term shifts in temperatures and weather patterns for a given country_id.
+    """
+    co2_emissions: Long
+}
+
+"Health data"
+type Health {
+    """
+    A state of complete physical, mental and social well-being and not merely the absence of disease or infirmity for a given age.
+    Countries: [GB, US]
+    """
+    daily_anxiety_disorders_by_age: Long @countries(codes: ["AT", "DE", "DK", "ES", "FI", "GB", "IT", "NL", "NO", "SE", "US"])
+}
+
+type Query {
+    "Climate Change data"
+    climate_change(country_id: String): ClimateChange
+    "Health data"
+    health(age: Long): Health
+}
+
+schema {
+    query: Query
+}

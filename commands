@@ -1,0 +1,43 @@
+SUPERSONIC:
+./gradlew clean
+quarkus build -Dquarkus.profile=native
+docker build -f src/main/docker/Dockerfile.native -t quarkbox .
+docker run -it --name quarkbox \
+    --rm -p 8080:8080 \
+    --add-host host.docker.internal:host-gateway \
+    quarkbox/quarkbox
+
+========================================================================================================================
+
+WIREMOCK:
+
+docker run -it --rm \
+  -p 10000:10000 \
+  --name wiremock \
+  -v $PWD/wiremock:/home/wiremock \
+  wiremock/wiremock:2.32.0 \
+  --verbose --port 10000
+
+========================================================================================================================
+
+GRAPHQL-UI:
+query ($country_id: String, $age: Long) {
+  climate_change(country_id: $country_id) {
+    co2_emissions
+  }
+  health(age: $age) {
+    daily_anxiety_disorders_by_age
+  }
+}
+
+========================================================================================================================
+
+SUPERSONIC CURL:
+curl --request POST \
+  --url http://localhost:8080/graphql \
+  --header 'Authorization: Basic some' \
+  --header 'Content-Type: application/json' \
+  --header 'test1: mock' \
+  --data '{
+	"query": "{ climate_change(country_id: \"GB\"){ co2_emissions } health(age: 15){ daily_anxiety_disorders_by_age } }"
+}'

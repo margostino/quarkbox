@@ -1,0 +1,142 @@
+greeting:
+  message: "Hej"
+
+"%dev":
+  quarkus:
+    package:
+      type: fast-jar
+    rest-client:
+      ping:
+        uri: http://wiremock:10000
+        scope: javax.inject.Singleton
+      healthCheck:
+        uri: http://wiremock:10000
+        scope: javax.inject.Singleton
+  mp:
+    openapi:
+      extensions:
+        smallrye:
+          info:
+            title: QuarkBox (development)
+#    messaging:
+#      outgoing:
+#        new_sessions_kafka_out:
+#          bootstrap.servers: localhost:9092
+#      incoming:
+#        new_sessions_kafka_in:
+#          bootstrap.servers: localhost:9092
+  kafka:
+    bootstrap.servers: localhost:9092
+  database:
+    hostname: localhost
+
+  namespace:
+    mappings:
+      climate_change:
+        data-providers:
+          - type: http
+            name: climate_change
+            url: http://wiremock:10000/indicators
+      health:
+        data-providers:
+          - type: http
+            name: health
+            url: http://wiremock:10000/indicators
+
+"%native":
+  quarkus:
+    package:
+      type: native
+    native:
+      container-build: true
+      container-runtime: docker
+      #      additional-build-args: --initialize-at-run-time=org.apache.http.conn.ssl.SSLConnectionSocketFactory, --initialize-at-build-time=org.apache.http.conn.ssl.SSLConnectionSocketFactory, --trace-class-initialization=org.apache.http.conn.ssl.SSLConnectionSocketFactory
+      additional-build-args: -J-Dorg.jboss.resteasy.microprofile.defaultToURLConnectionHttpClient=true
+    smallrye-graphql:
+      ui:
+        always-include: true
+    rest-client:
+      ping:
+        uri: http://host.docker.internal:10000
+        scope: javax.inject.Singleton
+      healthCheck:
+        uri: http://host.docker.internal:10000
+        scope: javax.inject.Singleton
+  mp:
+    openapi:
+      extensions:
+        smallrye:
+          info:
+            title: QuarkBox (native)
+#    messaging:
+#      outgoing:
+#        new_sessions_kafka_out:
+#          bootstrap.servers: kafka:9092
+#      incoming:
+#        new_sessions_kafka_in:
+#          bootstrap.servers: kafka:9092
+  kafka:
+    bootstrap.servers: kafka:9092
+  database:
+    hostname: dynamodb
+
+  namespace:
+    mappings:
+      climate_change:
+        data-providers:
+          - type: http
+            name: climate_change
+            url: http://host.docker.internal:10000/indicators
+      health:
+        data-providers:
+          - type: http
+            name: health
+            url: http://host.docker.internal:10000/indicators
+
+quarkus:
+  application:
+    name: QuarkBox
+  banner:
+    path: header.txt
+
+  log:
+    level: INFO
+    category:
+      "org.quarkbox":
+        level: ALL
+      "io.quarkus":
+        level: INFO
+      "org.apache":
+        level: INFO
+    console:
+      json: false
+
+  smallrye-graphql:
+    ui:
+      always-include: true
+    events:
+      enabled: true
+    schema-include-directives: true
+
+mp:
+  openapi:
+    extensions:
+      smallrye:
+        info:
+          title: QuarkBox
+          version: 1.0.0
+          description: Playground for Quarkus
+          contact:
+            email: maj.dagostino@gmail.com
+            name: QuarkBox
+            url: https://margostino.com/
+          license:
+            name: Apache 2.0
+            url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+quarkbox:
+  swagger-ui:
+    always-include: true
+  graphql:
+    schema: quarkbox.graphql
+  quote: "We traveled so far and your friendship meant everything"
