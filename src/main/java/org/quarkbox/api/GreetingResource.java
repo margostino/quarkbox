@@ -1,6 +1,9 @@
 package org.quarkbox.api;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.quarkbox.configuration.GreetingConfig;
 
 import javax.inject.Inject;
@@ -41,6 +44,8 @@ public class GreetingResource {
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
+    @Counted(name = "hello_counter", description = "How many primality checks have been performed.")
+    @Timed(name = "hello_timer", description = "A measure of how long it takes to perform the primality test.", unit = MetricUnits.MILLISECONDS, absolute = true)
     public String hello() {
         return "Hello World!";
     }

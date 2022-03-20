@@ -9,7 +9,7 @@ greeting:
       ping:
         uri: http://wiremock:10000
         scope: javax.inject.Singleton
-      healthCheck:
+      healthcheck:
         uri: http://wiremock:10000
         scope: javax.inject.Singleton
   mp:
@@ -18,13 +18,13 @@ greeting:
         smallrye:
           info:
             title: QuarkBox (development)
-#    messaging:
-#      outgoing:
-#        new_sessions_kafka_out:
-#          bootstrap.servers: localhost:9092
-#      incoming:
-#        new_sessions_kafka_in:
-#          bootstrap.servers: localhost:9092
+  #    messaging:
+  #      outgoing:
+  #        new_sessions_kafka_out:
+  #          bootstrap.servers: localhost:9092
+  #      incoming:
+  #        new_sessions_kafka_in:
+  #          bootstrap.servers: localhost:9092
   kafka:
     bootstrap.servers: localhost:9092
   database:
@@ -52,9 +52,6 @@ greeting:
       container-runtime: docker
       #      additional-build-args: --initialize-at-run-time=org.apache.http.conn.ssl.SSLConnectionSocketFactory, --initialize-at-build-time=org.apache.http.conn.ssl.SSLConnectionSocketFactory, --trace-class-initialization=org.apache.http.conn.ssl.SSLConnectionSocketFactory
       additional-build-args: -J-Dorg.jboss.resteasy.microprofile.defaultToURLConnectionHttpClient=true
-    smallrye-graphql:
-      ui:
-        always-include: true
     rest-client:
       ping:
         uri: http://host.docker.internal:10000
@@ -68,13 +65,13 @@ greeting:
         smallrye:
           info:
             title: QuarkBox (native)
-#    messaging:
-#      outgoing:
-#        new_sessions_kafka_out:
-#          bootstrap.servers: kafka:9092
-#      incoming:
-#        new_sessions_kafka_in:
-#          bootstrap.servers: kafka:9092
+  #    messaging:
+  #      outgoing:
+  #        new_sessions_kafka_out:
+  #          bootstrap.servers: kafka:9092
+  #      incoming:
+  #        new_sessions_kafka_in:
+  #          bootstrap.servers: kafka:9092
   kafka:
     bootstrap.servers: kafka:9092
   database:
@@ -98,6 +95,25 @@ quarkus:
     name: QuarkBox
   banner:
     path: header.txt
+  #    micrometer:
+  #      enabled: false
+  #      registry-enabled-default: false
+  #      binder-enabled-default: false
+  #      binder:
+  #        http-client:
+  #          enabled: false
+  smallrye-metrics:
+    path: /metrics
+    jaxrs:
+      enabled: true
+    micrometer:
+      compatibility: true
+  smallrye-graphql:
+    ui:
+      always-include: true
+    events:
+      enabled: true
+    schema-include-directives: true
 
   log:
     level: INFO
@@ -110,13 +126,6 @@ quarkus:
         level: INFO
     console:
       json: false
-
-  smallrye-graphql:
-    ui:
-      always-include: true
-    events:
-      enabled: true
-    schema-include-directives: true
 
 mp:
   openapi:

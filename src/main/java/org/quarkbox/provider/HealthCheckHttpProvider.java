@@ -15,7 +15,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @RegisterProvider(HttpResponseFilter.class)
-@RegisterRestClient(configKey = "healthCheck")
+@RegisterRestClient(configKey = "healthcheck")
 public interface HealthCheckHttpProvider {
 
     @GET

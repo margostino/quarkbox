@@ -10,7 +10,6 @@ import javax.enterprise.event.Observes;
 
 import static java.lang.String.format;
 
-
 @ApplicationScoped
 public class AppLifecycleBean {
 

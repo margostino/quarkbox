@@ -9,6 +9,8 @@ repositories {
 }
 
 dependencies {
+    //implementation 'io.quarkus:quarkus-micrometer-registry-prometheus'
+    implementation 'io.quarkus:quarkus-smallrye-metrics'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-smallrye-fault-tolerance'
     implementation 'io.quarkus:quarkus-resteasy-jackson'
@@ -19,6 +21,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-smallrye-graphql'
     implementation 'io.quarkus:quarkus-rest-client-mutiny'
     implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-arc-deployment'
     implementation 'io.quarkus:quarkus-rest-client-jackson'
     implementation 'io.quarkus:quarkus-smallrye-openapi'
     implementation 'io.quarkus:quarkus-smallrye-reactive-messaging-kafka:2.7.4.Final'
@@ -36,6 +39,8 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    compileOnly 'org.eclipse.microprofile.metrics:microprofile-metrics-api:4.0.1'
 
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'

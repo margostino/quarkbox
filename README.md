@@ -47,9 +47,53 @@ Once Quarkbox is up and running you have the following endpoints available:
 * Dev UI to view your installed extensions: [http://localhost:8080/q/dev](http://localhost:8080/q/dev)
 * OpenAPI UI: [http://localhost:8080/q/swagger-ui](http://localhost:8080/q/swagger-ui)
 * GraphQL UI: [http://localhost:8080/q/graphql-ui](http://localhost:8080/q/graphql-ui) 
+* GraphQL Schema: [http://localhost:8080/graphql/schema.graphql](http://localhost:8080/graphql/schema.graphql)
+* OpenMetrics: [http://localhost:8080/q/metrics](http://localhost:8080/q/metrics)
+* Microprofile Metrics: [http://localhost:8080/q/metrics/application](http://localhost:8080/q/metrics/application)
 
+## GraphQL UI
 
+Example:
 
+```graphql
+query ($country_id: String, $age: Long) {  
+  climate_change(country_id: $country_id) {
+    co2_emissions
+  }
+  health(age: $age) {
+    daily_anxiety_disorders_by_age
+  }
+}
+```
+
+## GraphQL API:
+
+Example Request:
+```http request
+curl --request POST \
+  --url http://localhost:8080/graphql \
+  --header 'Authorization: Basic some' \
+  --header 'Content-Type: application/json' \
+  --header 'test1: mock' \
+  --data '{
+	"query": "{ climate_change(country_id: \"GB\"){ co2_emissions } health(age: 15){ daily_anxiety_disorders_by_age } }"
+}' | jq "."
+```
+
+Example Response:
+
+```http request
+{
+  "data": {
+    "climate_change": {
+      "co2_emissions": 50
+    },
+    "health": {
+      "daily_anxiety_disorders_by_age": 430
+    }
+  }
+}
+```
 ## Running the application in dev mode
 
 You can use either Gradle or [Quarkus CLI](https://quarkus.io/guides/cli-tooling).

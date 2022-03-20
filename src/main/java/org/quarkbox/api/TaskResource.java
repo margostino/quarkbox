@@ -1,5 +1,6 @@
 package org.quarkbox.api;
 
+//import io.micrometer.core.instrument.MeterRegistry;
 import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -14,6 +15,12 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/")
 public class TaskResource {
+
+//    private final MeterRegistry registry;
+//
+//    TaskResource(MeterRegistry registry) {
+//        this.registry = registry;
+//    }
 
     @POST
     @Path("/task")
