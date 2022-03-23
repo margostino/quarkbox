@@ -7,7 +7,6 @@ import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.TypeDefinitionRegistry;
 import org.quarkbox.configuration.NamespaceMapping;
-import org.quarkbox.provider.HttpProvider;
 
 import java.util.List;
 import java.util.Set;

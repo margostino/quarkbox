@@ -49,7 +49,7 @@ Once Quarkbox is up and running you have the following endpoints available:
 * GraphQL UI: [http://localhost:8080/q/graphql-ui](http://localhost:8080/q/graphql-ui) 
 * GraphQL Schema: [http://localhost:8080/graphql/schema.graphql](http://localhost:8080/graphql/schema.graphql)
 * OpenMetrics: [http://localhost:8080/q/metrics](http://localhost:8080/q/metrics)
-* Microprofile Metrics: [http://localhost:8080/q/metrics/application](http://localhost:8080/q/metrics/application)
+* Microprofile Metrics: [http://localhost:8080/q/metrics/application](http://localhost:8080/q/metrics/application) [not available]
 
 ## GraphQL UI
 

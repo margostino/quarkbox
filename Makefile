@@ -104,6 +104,13 @@ docker.run.dependencies: d.compose.down
 	docker-compose up -d
 	docker-compose ps
 
+.PHONY: wiremock
+wiremock: d.compose.down
+	make d.compose.up docker-profile=wiremock
+	make docker.wait
+	docker-compose up -d
+	docker-compose ps
+
 .PHONY: docker.run.quarkbox
 docker.run.quarkbox:
 	$(call DOCKER_COMPOSE) up -d --force-recreate --build quarkbox

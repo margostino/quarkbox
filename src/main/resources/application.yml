@@ -95,19 +95,26 @@ quarkus:
     name: QuarkBox
   banner:
     path: header.txt
-  #    micrometer:
-  #      enabled: false
-  #      registry-enabled-default: false
-  #      binder-enabled-default: false
-  #      binder:
-  #        http-client:
-  #          enabled: false
-  smallrye-metrics:
-    path: /metrics
-    jaxrs:
-      enabled: true
-    micrometer:
-      compatibility: true
+  micrometer:
+    enabled: true
+    registry-enabled-default: true
+    binder-enabled-default: true
+    binder:
+      http-client:
+        enabled: true
+      http-server:
+        enabled: true
+    export:
+      json:
+        path: /json-metrics
+      prometheus:
+        path: /metrics
+#  smallrye-metrics:
+#    path: /metrics
+#    jaxrs:
+#      enabled: true
+#    micrometer:
+#      compatibility: true
   smallrye-graphql:
     ui:
       always-include: true

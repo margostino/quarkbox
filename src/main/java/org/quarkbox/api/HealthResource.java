@@ -4,6 +4,7 @@ import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.quarkbox.provider.HealthCheckHttpProvider;
+import org.quarkbox.provider.HttpProvider;
 import org.quarkbox.provider.PingProvider;
 
 import javax.inject.Inject;

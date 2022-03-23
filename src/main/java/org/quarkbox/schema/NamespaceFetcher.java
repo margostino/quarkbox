@@ -37,7 +37,7 @@ import static org.quarkbox.domain.AppConstants.REQUEST_ID_HEADER;
 public class NamespaceFetcher implements DataFetcher<Map<String, Object>> {
 
     private String name;
-    private List<HttpProvider> dataProviders;
+    public List<HttpProvider> dataProviders;
 
     @Override
     public Map<String, Object> get(DataFetchingEnvironment environment) {

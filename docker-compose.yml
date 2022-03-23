@@ -8,6 +8,7 @@ services:
     profiles:
       - native
       - dev
+      - wiremock
     ports:
       - "10000:10000"
     command: "--verbose --port 10000"

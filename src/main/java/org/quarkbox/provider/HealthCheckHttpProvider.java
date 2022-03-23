@@ -26,12 +26,10 @@ public interface HealthCheckHttpProvider {
     Uni<String> healthCheck();
 
     class HealthCheckFallback implements FallbackHandler<Uni<String>> {
-
         public Uni<String> handle(ExecutionContext context) {
             Log.info("FALLBACK!");
             return Uni.createFrom().item("fallback");
         }
-
     }
 
 }
