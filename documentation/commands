@@ -1,5 +1,6 @@
 SUPERSONIC:
 ./gradlew clean
+(only for aarch64) docker build -f ./src/main/docker/Dockerfile.aarch64 -t margostino/quarkus-build-aarch64 .
 quarkus build -Dquarkus.profile=native
 docker build -f src/main/docker/Dockerfile.native -t quarkbox .
 docker run -it --name quarkbox \

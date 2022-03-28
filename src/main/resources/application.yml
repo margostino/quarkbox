@@ -50,6 +50,7 @@ greeting:
     native:
       container-build: true
       container-runtime: docker
+      builder-image: margostino/quarkus-build-aarch64 # only for aarch64, disable otherwise
       #      additional-build-args: --initialize-at-run-time=org.apache.http.conn.ssl.SSLConnectionSocketFactory, --initialize-at-build-time=org.apache.http.conn.ssl.SSLConnectionSocketFactory, --trace-class-initialization=org.apache.http.conn.ssl.SSLConnectionSocketFactory
       additional-build-args: -J-Dorg.jboss.resteasy.microprofile.defaultToURLConnectionHttpClient=true
     rest-client:
